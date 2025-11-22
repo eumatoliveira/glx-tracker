@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Accordion,
@@ -11,9 +12,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Building2, Target, Users, FileText, TrendingUp, MapPin, Settings, CheckCircle2 } from "lucide-react";
+import { Building2, Target, Users, FileText, TrendingUp, MapPin, Settings, CheckCircle2, Edit2, Save } from "lucide-react";
+import { toast } from "sonner";
 
 export const IntakeForm = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleToggleEdit = () => {
+    if (isEditing) {
+      toast.success("Alterações salvas com sucesso!");
+    }
+    setIsEditing(!isEditing);
+  };
   const sections = [
     { id: "1", title: "Dados Institucionais", icon: Building2, completed: true },
     { id: "2", title: "Contexto Estratégico", icon: Target, completed: true },
@@ -69,14 +79,14 @@ export const IntakeForm = () => {
           <AccordionContent className="space-y-4 pt-4">
             <div className="space-y-2">
               <Label>Nome da Instituição</Label>
-              <Input value="Hospital São Lucas" disabled />
+              <Input value="Hospital São Lucas" disabled={!isEditing} />
             </div>
             <div className="space-y-2">
               <Label>Tipo de organização</Label>
               <div className="grid grid-cols-2 gap-2">
                 {["Hospital Geral", "Hospital Especializado", "Clínica", "Laboratório"].map((type) => (
                   <div key={type} className="flex items-center space-x-2">
-                    <Checkbox id={type} checked={type === "Hospital Geral"} />
+                    <Checkbox id={type} checked={type === "Hospital Geral"} disabled={!isEditing} />
                     <label htmlFor={type} className="text-sm">{type}</label>
                   </div>
                 ))}
@@ -85,11 +95,11 @@ export const IntakeForm = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Total de colaboradores</Label>
-                <Input type="number" value="450" disabled />
+                <Input type="number" value="450" disabled={!isEditing} />
               </div>
               <div className="space-y-2">
                 <Label>Médicos credenciados</Label>
-                <Input type="number" value="85" disabled />
+                <Input type="number" value="85" disabled={!isEditing} />
               </div>
             </div>
           </AccordionContent>
@@ -114,7 +124,7 @@ export const IntakeForm = () => {
                   "Melhor experiência do paciente",
                 ].map((meta) => (
                   <div key={meta} className="flex items-center space-x-2">
-                    <Checkbox id={meta} checked />
+                    <Checkbox id={meta} checked disabled={!isEditing} />
                     <label htmlFor={meta} className="text-sm">{meta}</label>
                   </div>
                 ))}
@@ -124,7 +134,7 @@ export const IntakeForm = () => {
               <Label>Maior desafio atual da instituição</Label>
               <Textarea
                 value="Alto tempo de espera no pronto-socorro e baixo giro de leitos"
-                disabled
+                disabled={!isEditing}
                 rows={3}
               />
             </div>
@@ -144,11 +154,11 @@ export const IntakeForm = () => {
               <Label>Organograma disponível?</Label>
               <div className="flex gap-4">
                 <div className="flex items-center space-x-2">
-                  <Checkbox id="org-sim" />
+                  <Checkbox id="org-sim" disabled={!isEditing} />
                   <label htmlFor="org-sim" className="text-sm">Sim (anexar)</label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox id="org-nao" />
+                  <Checkbox id="org-nao" disabled={!isEditing} />
                   <label htmlFor="org-nao" className="text-sm">Não</label>
                 </div>
               </div>
@@ -161,7 +171,7 @@ export const IntakeForm = () => {
                   <div className="flex gap-4">
                     {["Baixa", "Média", "Alta"].map((nivel) => (
                       <div key={nivel} className="flex items-center space-x-2">
-                        <Checkbox id={`${item}-${nivel}`} />
+                        <Checkbox id={`${item}-${nivel}`} disabled={!isEditing} />
                         <label htmlFor={`${item}-${nivel}`} className="text-sm">{nivel}</label>
                       </div>
                     ))}
@@ -186,19 +196,19 @@ export const IntakeForm = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
                   <Label className="text-xs">Tempo Médio de Permanência (LOS)</Label>
-                  <Input placeholder="Ex: 5.2 dias" />
+                  <Input placeholder="Ex: 5.2 dias" disabled={!isEditing} />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs">Taxa de ocupação</Label>
-                  <Input placeholder="Ex: 85%" />
+                  <Input placeholder="Ex: 85%" disabled={!isEditing} />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs">Giro de leitos</Label>
-                  <Input placeholder="Ex: 2.5" />
+                  <Input placeholder="Ex: 2.5" disabled={!isEditing} />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs">Tempo de espera triagem</Label>
-                  <Input placeholder="Ex: 45 min" />
+                  <Input placeholder="Ex: 45 min" disabled={!isEditing} />
                 </div>
               </div>
             </div>
@@ -207,11 +217,11 @@ export const IntakeForm = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
                   <Label className="text-xs">Custo médio por paciente</Label>
-                  <Input placeholder="Ex: R$ 3.500" />
+                  <Input placeholder="Ex: R$ 3.500" disabled={!isEditing} />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs">Glosas (% e valor)</Label>
-                  <Input placeholder="Ex: 8% / R$ 120k" />
+                  <Input placeholder="Ex: 8% / R$ 120k" disabled={!isEditing} />
                 </div>
               </div>
             </div>
@@ -219,8 +229,23 @@ export const IntakeForm = () => {
         </AccordionItem>
       </Accordion>
 
-      <Button className="w-full" size="lg">
-        Salvar Progresso
+      <Button 
+        className="w-full" 
+        size="lg"
+        onClick={handleToggleEdit}
+        variant={isEditing ? "default" : "outline"}
+      >
+        {isEditing ? (
+          <>
+            <Save className="h-4 w-4 mr-2" />
+            Salvar Alterações
+          </>
+        ) : (
+          <>
+            <Edit2 className="h-4 w-4 mr-2" />
+            Editar Informações
+          </>
+        )}
       </Button>
     </div>
   );
