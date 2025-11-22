@@ -1,4 +1,4 @@
-import { Home, Clock, FileText, User } from "lucide-react";
+import { Home, Clock, FileText, Building2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BottomNavProps {
@@ -8,10 +8,10 @@ interface BottomNavProps {
 
 export const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   const tabs = [
-    { id: "dashboard", icon: Home, label: "Início" },
+    { id: "dashboard", icon: Home, label: "Dashboard" },
     { id: "timeline", icon: Clock, label: "Timeline" },
-    { id: "exams", icon: FileText, label: "Exames" },
-    { id: "profile", icon: User, label: "Perfil" },
+    { id: "intake", icon: FileText, label: "Formulário" },
+    { id: "profile", icon: Building2, label: "Instituição" },
   ];
 
   return (

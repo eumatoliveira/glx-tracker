@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dashboard } from "@/components/Dashboard";
 import { Timeline } from "@/components/Timeline";
-import { Exams } from "@/components/Exams";
+import { IntakeForm } from "@/components/IntakeForm";
 import { Profile } from "@/components/Profile";
 import { BottomNav } from "@/components/BottomNav";
 
@@ -14,8 +14,8 @@ const Index = () => {
         return <Dashboard />;
       case "timeline":
         return <Timeline />;
-      case "exams":
-        return <Exams />;
+      case "intake":
+        return <IntakeForm />;
       case "profile":
         return <Profile />;
       default:
@@ -30,7 +30,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-bold text-primary">HealthLean</h1>
-              <p className="text-xs text-muted-foreground">Six Sigma Quality</p>
+              <p className="text-xs text-muted-foreground">Consultoria Lean Six Sigma</p>
             </div>
           </div>
         </div>

@@ -13,37 +13,44 @@ export const Timeline = () => {
   const events: TimelineEvent[] = [
     {
       id: 1,
-      title: "Registro Inicial",
-      description: "Cadastro realizado com sucesso",
-      date: "15 Nov, 10:30",
+      title: "Kick-off e Alinhamento",
+      description: "Reunião inicial com liderança, definição de escopo e objetivos",
+      date: "01 Nov, 09:00",
       status: "completed",
     },
     {
       id: 2,
-      title: "Triagem Médica",
-      description: "Avaliação preliminar concluída",
-      date: "15 Nov, 14:45",
+      title: "Formulário de Intake",
+      description: "Coleta de dados institucionais e mapeamento de processos críticos",
+      date: "05 Nov, 14:00",
       status: "completed",
     },
     {
       id: 3,
-      title: "Análise em Andamento",
-      description: "Exames sendo processados",
-      date: "16 Nov, 09:00",
+      title: "Diagnóstico em Campo",
+      description: "Observação direta, entrevistas e análise de indicadores atuais",
+      date: "12 Nov - Em andamento",
       status: "current",
     },
     {
       id: 4,
-      title: "Elaboração de Laudo",
-      description: "Aguardando análise completa",
-      date: "Previsto: 17 Nov",
+      title: "VSM - Value Stream Mapping",
+      description: "Mapeamento de fluxo de valor dos processos prioritários",
+      date: "Previsto: 19 Nov",
       status: "pending",
     },
     {
       id: 5,
-      title: "Entrega de Resultados",
-      description: "Resultados serão disponibilizados",
-      date: "Previsto: 18 Nov",
+      title: "Workshop Kaizen",
+      description: "Semana intensiva de melhorias rápidas com as equipes",
+      date: "Previsto: 26 Nov",
+      status: "pending",
+    },
+    {
+      id: 6,
+      title: "Plano de Implementação",
+      description: "Definição de roadmap e cronograma de ações",
+      date: "Previsto: 03 Dez",
       status: "pending",
     },
   ];
@@ -62,8 +69,8 @@ export const Timeline = () => {
   return (
     <div className="space-y-6 animate-slide-up">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-1">Timeline</h2>
-        <p className="text-muted-foreground">Acompanhe todas as etapas do processo</p>
+        <h2 className="text-2xl font-bold text-foreground mb-1">Timeline do Projeto</h2>
+        <p className="text-muted-foreground">Acompanhe todas as fases da consultoria</p>
       </div>
 
       <div className="space-y-4">
@@ -87,7 +94,7 @@ export const Timeline = () => {
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-1">
                   <h3 className="font-semibold text-foreground">{event.title}</h3>
-                  <span className="text-xs text-muted-foreground">{event.date}</span>
+                  <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">{event.date}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{event.description}</p>
               </CardContent>
