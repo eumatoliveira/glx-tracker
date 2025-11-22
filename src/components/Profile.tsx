@@ -1,9 +1,21 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Building2, Mail, Phone, MapPin, Users, Calendar } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Building2, Mail, Phone, MapPin, Users, Calendar, Edit2, Save } from "lucide-react";
+import { toast } from "sonner";
 
 export const Profile = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleToggleEdit = () => {
+    if (isEditing) {
+      toast.success("Informações atualizadas com sucesso!");
+    }
+    setIsEditing(!isEditing);
+  };
   const institutionInfo = [
     { icon: Building2, label: "Instituição", value: "Hospital São Lucas" },
     { icon: Mail, label: "Email", value: "contato@saolucas.com.br" },
@@ -58,14 +70,26 @@ export const Profile = () => {
           {institutionInfo.map((info, index) => {
             const Icon = info.icon;
             return (
-              <div key={index} className="flex items-center gap-3">
-                <div className="p-2 bg-accent rounded-lg">
-                  <Icon className="h-4 w-4 text-accent-foreground" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-muted-foreground">{info.label}</p>
-                  <p className="text-sm font-medium text-foreground truncate">{info.value}</p>
-                </div>
+              <div key={index}>
+                {isEditing ? (
+                  <div className="space-y-2">
+                    <Label className="text-xs flex items-center gap-2">
+                      <Icon className="h-3 w-3" />
+                      {info.label}
+                    </Label>
+                    <Input defaultValue={info.value} />
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-accent rounded-lg">
+                      <Icon className="h-4 w-4 text-accent-foreground" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-muted-foreground">{info.label}</p>
+                      <p className="text-sm font-medium text-foreground truncate">{info.value}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -107,8 +131,23 @@ export const Profile = () => {
         </CardContent>
       </Card>
 
-      <Button variant="outline" className="w-full" size="lg">
-        Editar Informações
+      <Button 
+        variant={isEditing ? "default" : "outline"}
+        className="w-full" 
+        size="lg"
+        onClick={handleToggleEdit}
+      >
+        {isEditing ? (
+          <>
+            <Save className="h-4 w-4 mr-2" />
+            Salvar Alterações
+          </>
+        ) : (
+          <>
+            <Edit2 className="h-4 w-4 mr-2" />
+            Editar Informações
+          </>
+        )}
       </Button>
     </div>
   );
