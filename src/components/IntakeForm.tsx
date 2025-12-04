@@ -166,80 +166,98 @@ export const IntakeForm = () => {
   };
 
   const exportToCSV = () => {
+    // Headers otimizados para Power BI
     const headers = [
-      "Seção", "Pergunta", "Resposta"
+      "ID",
+      "Secao",
+      "Categoria",
+      "Pergunta",
+      "Resposta",
+      "Tipo_Dado",
+      "Data_Coleta"
     ];
     
+    const dataColeta = new Date().toISOString().split('T')[0];
+    
     const rows = [
-      ["Marketing e Aquisição", "Quantos leads entram por mês", formData.leadsPerMonth],
-      ["Marketing e Aquisição", "De onde vêm os leads", formData.leadSources],
-      ["Marketing e Aquisição", "Custo por lead", formData.costPerLead],
-      ["Marketing e Aquisição", "Quem responde os leads", formData.whoRespondsLeads],
-      ["Marketing e Aquisição", "Tempo médio de resposta", formData.avgResponseTime],
-      ["Marketing e Aquisição", "Qual é o funil (recebe, responde, agenda, comparece)", formData.funnel],
-      ["Marketing e Aquisição", "Tem follow up?", formData.hasFollowUp],
-      ["Marketing e Aquisição", "Detalhes do follow up (tempo, frequência)", formData.followUpDetails],
-      ["Marketing e Aquisição", "Tem CRM ou planilha", formData.hasCRM],
-      ["Marketing e Aquisição", "Responsável pelas vendas", formData.salesResponsible],
-      ["Marketing e Aquisição", "Responsável pelo setor de leads", formData.leadsSectorResponsible],
-      ["Agenda/Operação", "Consultas que cabem por dia por especialidade", formData.consultationsPerDayBySpecialty],
-      ["Agenda/Operação", "Consultas realizadas de fato por especialidade", formData.actualConsultationsBySpecialty],
-      ["Agenda/Operação", "Procedimentos realizados por especialidade", formData.proceduresBySpecialty],
-      ["Agenda/Operação", "Taxa de ocupação semanal", formData.weeklyOccupancy],
-      ["Agenda/Operação", "Timeline de horários mortos/vagos e cheios", formData.deadHoursTimeline],
-      ["Agenda/Operação", "Número de no-shows", formData.noShowCount],
-      ["Agenda/Operação", "Taxa de remarcação e comparecimento", formData.rescheduleRate],
-      ["Agenda/Operação", "Taxa de cancelamentos", formData.cancellationRate],
-      ["Agenda/Operação", "Política de cancelamento", formData.cancellationPolicy],
-      ["Agenda/Operação", "O que fazem durante buracos na agenda", formData.agendaGapsAction],
-      ["Agenda/Operação", "Tem secretária? Consegue reorganizar rápido?", formData.hasSecretary],
-      ["Agenda/Operação", "Função da secretária", formData.secretaryFunction],
-      ["Agenda/Operação", "Existe confirmação automática?", formData.hasAutoConfirmation],
-      ["Financeiro", "Ticket médio - Consulta inicial", formData.avgTicketInitial],
-      ["Financeiro", "Ticket médio - Retorno", formData.avgTicketReturn],
-      ["Financeiro", "Ticket médio - Pacotes", formData.avgTicketPackages],
-      ["Financeiro", "Ticket médio - Protocolos", formData.avgTicketProtocols],
-      ["Financeiro", "Protocolos vendidos por mês", formData.protocolsSoldPerMonth],
-      ["Financeiro", "Serviços adicionais (produtos, procedimentos)", formData.additionalServices],
-      ["Financeiro", "Receita bruta últimos 12 meses", formData.grossRevenue12m],
-      ["Financeiro", "Receita líquida últimos 12 meses", formData.netRevenue12m],
-      ["Financeiro", "Custos fixos detalhados", formData.fixedCosts],
-      ["Financeiro", "Margem real", formData.realMargin],
-      ["Financeiro", "Breakdown: novos pacientes / recorrência / retorno", formData.revenueBreakdown],
-      ["Financeiro", "LTV (Lifetime Value)", formData.ltv],
-      ["UX (Retenção)", "O que o paciente recebe depois da consulta?", formData.postConsultationContact],
-      ["UX (Retenção)", "Tem plano de acompanhamento?", formData.followUpPlan],
-      ["UX (Retenção)", "Tem suporte via WhatsApp?", formData.whatsappSupport],
-      ["UX (Retenção)", "Retorno programado? Já sai com consulta marcada?", formData.scheduledReturn],
-      ["UX (Retenção)", "Tem lembretes? Manual ou automático?", formData.hasReminders],
-      ["UX (Retenção)", "Processo de lembretes", formData.reminderProcess],
-      ["UX (Retenção)", "Estrutura de pós-consulta", formData.postConsultationStructure],
-      ["UX (Retenção)", "Reclamações dos pacientes", formData.patientComplaints],
-      ["UX (Retenção)", "Tempo de espera médio e o que fazem nesse tempo", formData.avgWaitTime],
-      ["Processos Internos", "Reuniões do CEO com equipe (frequência)", formData.ceoMeetings],
-      ["Processos Internos", "3 problemas percebidos pela equipe", formData.teamPerceivedProblems],
-      ["Processos Internos", "Tarefas manuais da secretária", formData.manualSecretaryTasks],
-      ["Processos Internos", "Tarefas que poderiam ser automatizadas", formData.automationOpportunities],
-      ["Processos Internos", "Processo de tomada de decisão", formData.decisionProcess],
-      ["Processos Internos", "Fluxo da jornada do paciente", formData.patientJourneyFlow],
-      ["Identidade e Posicionamento", "Visão do CEO para a clínica", formData.ceoVision],
-      ["Identidade e Posicionamento", "Como quer crescer?", formData.growthPlan],
-      ["Identidade e Posicionamento", "O que a clínica faz de diferente?", formData.differentiator],
-      ["Identidade e Posicionamento", "Público-alvo desejado", formData.targetAudience],
-      ["Dados", "Tem planilhas, dashboards, relatórios?", formData.hasSpreadsheets],
-      ["Dados", "Tem dashboards/BI?", formData.hasDashboards],
-      ["Dados", "Onde estão os dados?", formData.dataLocation],
-      ["Dados", "Os dados são confiáveis?", formData.dataReliability],
+      // Marketing e Aquisição
+      ["MKT_001", "Marketing e Aquisicao", "Leads", "Quantos leads entram por mes", formData.leadsPerMonth, "Numerico", dataColeta],
+      ["MKT_002", "Marketing e Aquisicao", "Leads", "De onde vem os leads", formData.leadSources, "Texto", dataColeta],
+      ["MKT_003", "Marketing e Aquisicao", "Custos", "Custo por lead", formData.costPerLead, "Monetario", dataColeta],
+      ["MKT_004", "Marketing e Aquisicao", "Atendimento", "Quem responde os leads", formData.whoRespondsLeads, "Texto", dataColeta],
+      ["MKT_005", "Marketing e Aquisicao", "Atendimento", "Tempo medio de resposta", formData.avgResponseTime, "Tempo", dataColeta],
+      ["MKT_006", "Marketing e Aquisicao", "Funil", "Funil de conversao", formData.funnel, "Texto", dataColeta],
+      ["MKT_007", "Marketing e Aquisicao", "Follow Up", "Tem follow up", formData.hasFollowUp, "Booleano", dataColeta],
+      ["MKT_008", "Marketing e Aquisicao", "Follow Up", "Detalhes do follow up", formData.followUpDetails, "Texto", dataColeta],
+      ["MKT_009", "Marketing e Aquisicao", "Sistemas", "Tem CRM ou planilha", formData.hasCRM, "Texto", dataColeta],
+      ["MKT_010", "Marketing e Aquisicao", "Responsaveis", "Responsavel pelas vendas", formData.salesResponsible, "Texto", dataColeta],
+      ["MKT_011", "Marketing e Aquisicao", "Responsaveis", "Responsavel pelo setor de leads", formData.leadsSectorResponsible, "Texto", dataColeta],
+      // Agenda/Operação
+      ["AGD_001", "Agenda e Operacao", "Capacidade", "Consultas que cabem por dia por especialidade", formData.consultationsPerDayBySpecialty, "Numerico", dataColeta],
+      ["AGD_002", "Agenda e Operacao", "Producao", "Consultas realizadas por especialidade", formData.actualConsultationsBySpecialty, "Numerico", dataColeta],
+      ["AGD_003", "Agenda e Operacao", "Producao", "Procedimentos realizados por especialidade", formData.proceduresBySpecialty, "Numerico", dataColeta],
+      ["AGD_004", "Agenda e Operacao", "Ocupacao", "Taxa de ocupacao semanal", formData.weeklyOccupancy, "Percentual", dataColeta],
+      ["AGD_005", "Agenda e Operacao", "Ocupacao", "Timeline de horarios mortos e cheios", formData.deadHoursTimeline, "Texto", dataColeta],
+      ["AGD_006", "Agenda e Operacao", "No-Shows", "Numero de no-shows", formData.noShowCount, "Numerico", dataColeta],
+      ["AGD_007", "Agenda e Operacao", "No-Shows", "Taxa de remarcacao e comparecimento", formData.rescheduleRate, "Percentual", dataColeta],
+      ["AGD_008", "Agenda e Operacao", "Cancelamentos", "Taxa de cancelamentos", formData.cancellationRate, "Percentual", dataColeta],
+      ["AGD_009", "Agenda e Operacao", "Cancelamentos", "Politica de cancelamento", formData.cancellationPolicy, "Texto", dataColeta],
+      ["AGD_010", "Agenda e Operacao", "Processos", "Acoes durante buracos na agenda", formData.agendaGapsAction, "Texto", dataColeta],
+      ["AGD_011", "Agenda e Operacao", "Equipe", "Tem secretaria e reorganizacao", formData.hasSecretary, "Texto", dataColeta],
+      ["AGD_012", "Agenda e Operacao", "Equipe", "Funcao da secretaria", formData.secretaryFunction, "Texto", dataColeta],
+      ["AGD_013", "Agenda e Operacao", "Automacao", "Confirmacao automatica", formData.hasAutoConfirmation, "Booleano", dataColeta],
+      // Financeiro
+      ["FIN_001", "Financeiro", "Ticket Medio", "Ticket medio consulta inicial", formData.avgTicketInitial, "Monetario", dataColeta],
+      ["FIN_002", "Financeiro", "Ticket Medio", "Ticket medio retorno", formData.avgTicketReturn, "Monetario", dataColeta],
+      ["FIN_003", "Financeiro", "Ticket Medio", "Ticket medio pacotes", formData.avgTicketPackages, "Monetario", dataColeta],
+      ["FIN_004", "Financeiro", "Ticket Medio", "Ticket medio protocolos", formData.avgTicketProtocols, "Monetario", dataColeta],
+      ["FIN_005", "Financeiro", "Vendas", "Protocolos vendidos por mes", formData.protocolsSoldPerMonth, "Numerico", dataColeta],
+      ["FIN_006", "Financeiro", "Vendas", "Servicos adicionais", formData.additionalServices, "Texto", dataColeta],
+      ["FIN_007", "Financeiro", "Receita", "Receita bruta 12 meses", formData.grossRevenue12m, "Monetario", dataColeta],
+      ["FIN_008", "Financeiro", "Receita", "Receita liquida 12 meses", formData.netRevenue12m, "Monetario", dataColeta],
+      ["FIN_009", "Financeiro", "Custos", "Custos fixos detalhados", formData.fixedCosts, "Monetario", dataColeta],
+      ["FIN_010", "Financeiro", "Margem", "Margem real", formData.realMargin, "Percentual", dataColeta],
+      ["FIN_011", "Financeiro", "Receita", "Breakdown novos x recorrencia x retorno", formData.revenueBreakdown, "Texto", dataColeta],
+      ["FIN_012", "Financeiro", "Metricas", "LTV", formData.ltv, "Monetario", dataColeta],
+      // UX (Retenção)
+      ["UX_001", "UX e Retencao", "Pos-Consulta", "Contato pos consulta", formData.postConsultationContact, "Texto", dataColeta],
+      ["UX_002", "UX e Retencao", "Acompanhamento", "Plano de acompanhamento", formData.followUpPlan, "Texto", dataColeta],
+      ["UX_003", "UX e Retencao", "Suporte", "Suporte via WhatsApp", formData.whatsappSupport, "Booleano", dataColeta],
+      ["UX_004", "UX e Retencao", "Retorno", "Retorno programado", formData.scheduledReturn, "Texto", dataColeta],
+      ["UX_005", "UX e Retencao", "Lembretes", "Tem lembretes", formData.hasReminders, "Booleano", dataColeta],
+      ["UX_006", "UX e Retencao", "Lembretes", "Processo de lembretes", formData.reminderProcess, "Texto", dataColeta],
+      ["UX_007", "UX e Retencao", "Pos-Consulta", "Estrutura pos-consulta", formData.postConsultationStructure, "Texto", dataColeta],
+      ["UX_008", "UX e Retencao", "Feedback", "Reclamacoes dos pacientes", formData.patientComplaints, "Texto", dataColeta],
+      ["UX_009", "UX e Retencao", "Experiencia", "Tempo de espera medio", formData.avgWaitTime, "Tempo", dataColeta],
+      // Processos Internos
+      ["PROC_001", "Processos Internos", "Gestao", "Reunioes do CEO com equipe", formData.ceoMeetings, "Texto", dataColeta],
+      ["PROC_002", "Processos Internos", "Problemas", "3 problemas percebidos pela equipe", formData.teamPerceivedProblems, "Texto", dataColeta],
+      ["PROC_003", "Processos Internos", "Tarefas", "Tarefas manuais da secretaria", formData.manualSecretaryTasks, "Texto", dataColeta],
+      ["PROC_004", "Processos Internos", "Automacao", "Oportunidades de automacao", formData.automationOpportunities, "Texto", dataColeta],
+      ["PROC_005", "Processos Internos", "Decisao", "Processo de tomada de decisao", formData.decisionProcess, "Texto", dataColeta],
+      ["PROC_006", "Processos Internos", "Jornada", "Fluxo da jornada do paciente", formData.patientJourneyFlow, "Texto", dataColeta],
+      // Identidade e Posicionamento
+      ["IDENT_001", "Identidade e Posicionamento", "Visao", "Visao do CEO para clinica", formData.ceoVision, "Texto", dataColeta],
+      ["IDENT_002", "Identidade e Posicionamento", "Crescimento", "Como quer crescer", formData.growthPlan, "Texto", dataColeta],
+      ["IDENT_003", "Identidade e Posicionamento", "Diferencial", "O que a clinica faz de diferente", formData.differentiator, "Texto", dataColeta],
+      ["IDENT_004", "Identidade e Posicionamento", "Publico", "Publico alvo desejado", formData.targetAudience, "Texto", dataColeta],
+      // Dados
+      ["DAD_001", "Dados", "Documentacao", "Tem planilhas dashboards relatorios", formData.hasSpreadsheets, "Texto", dataColeta],
+      ["DAD_002", "Dados", "BI", "Tem dashboards BI", formData.hasDashboards, "Booleano", dataColeta],
+      ["DAD_003", "Dados", "Localizacao", "Onde estao os dados", formData.dataLocation, "Texto", dataColeta],
+      ["DAD_004", "Dados", "Qualidade", "Os dados sao confiaveis", formData.dataReliability, "Texto", dataColeta],
     ];
 
+    // Usar ponto e vírgula como separador (melhor para Power BI em PT-BR)
     const csvContent = [
-      headers.join(","),
-      ...rows.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(","))
-    ].join("\n");
+      headers.join(";"),
+      ...rows.map(row => row.map(cell => `"${(cell || "").replace(/"/g, '""')}"`).join(";"))
+    ].join("\r\n");
 
+    // UTF-8 BOM para Power BI reconhecer acentos corretamente
     const blob = new Blob(["\ufeff" + csvContent], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "diagnostico-lean-health.csv");
-    toast.success("CSV exportado com sucesso!");
+    saveAs(blob, `diagnostico-lean-health-${dataColeta}.csv`);
+    toast.success("CSV para Power BI exportado com sucesso!");
   };
 
   const exportToWord = async () => {
