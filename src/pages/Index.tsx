@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { Menu } from "lucide-react";
 import { Dashboard } from "@/components/Dashboard";
 import { Timeline } from "@/components/Timeline";
 import { IntakeForm } from "@/components/IntakeForm";
 import { Profile } from "@/components/Profile";
 import { Sidebar } from "@/components/Sidebar";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -23,28 +26,55 @@ const Index = () => {
     }
   };
 
+  const getTitle = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return "Dashboard";
+      case "timeline":
+        return "Timeline do Projeto";
+      case "intake":
+        return "Diagnóstico";
+      case "profile":
+        return "Perfil da Instituição";
+      default:
+        return "Dashboard";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex w-full">
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
       
-      <div className="flex-1 ml-64">
-        <header className="sticky top-0 z-40 bg-card border-b border-border">
-          <div className="px-8 py-6">
-            <div className="flex items-center justify-between">
+      <div className="flex-1 lg:ml-64">
+        <header className="sticky top-0 z-30 bg-card border-b border-border">
+          <div className="px-4 py-4 lg:px-8 lg:py-6">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">
-                  {activeTab === "dashboard" && "Dashboard"}
-                  {activeTab === "timeline" && "Timeline do Projeto"}
-                  {activeTab === "intake" && "Diagnóstico"}
-                  {activeTab === "profile" && "Perfil da Instituição"}
+                <h1 className="text-xl lg:text-2xl font-bold text-foreground">
+                  {getTitle()}
                 </h1>
-                <p className="text-sm text-muted-foreground">Consultoria Lean Health Care</p>
+                <p className="text-xs lg:text-sm text-muted-foreground">
+                  Consultoria Lean Health Care
+                </p>
               </div>
             </div>
           </div>
         </header>
 
-        <main className="p-8">
+        <main className="p-4 lg:p-8">
           {renderContent()}
         </main>
       </div>
