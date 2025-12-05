@@ -58,24 +58,24 @@ export const Timeline = () => {
   const getStatusIcon = (status: TimelineEvent["status"]) => {
     switch (status) {
       case "completed":
-        return <CheckCircle2 className="h-5 w-5 text-success" />;
+        return <CheckCircle2 className="h-6 w-6 sm:h-5 sm:w-5 text-success" />;
       case "current":
-        return <Clock className="h-5 w-5 text-primary animate-pulse" />;
+        return <Clock className="h-6 w-6 sm:h-5 sm:w-5 text-primary animate-pulse" />;
       case "pending":
-        return <Circle className="h-5 w-5 text-muted-foreground" />;
+        return <Circle className="h-6 w-6 sm:h-5 sm:w-5 text-muted-foreground" />;
     }
   };
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-5 sm:space-y-6 animate-slide-up">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-1">Timeline do Projeto</h2>
-        <p className="text-muted-foreground">Acompanhe todas as fases da consultoria</p>
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Timeline do Projeto</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Acompanhe todas as fases da consultoria</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {events.map((event, index) => (
-          <div key={event.id} className="flex gap-4">
+          <div key={event.id} className="flex gap-3 sm:gap-4">
             <div className="flex flex-col items-center">
               <div className="flex-shrink-0">{getStatusIcon(event.status)}</div>
               {index < events.length - 1 && (
@@ -91,12 +91,12 @@ export const Timeline = () => {
                 event.status === "current" ? "border-primary shadow-sm" : ""
               }`}
             >
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-1">
-                  <h3 className="font-semibold text-foreground">{event.title}</h3>
-                  <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">{event.date}</span>
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 gap-0.5 sm:gap-0">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{event.title}</h3>
+                  <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">{event.date}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">{event.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground">{event.description}</p>
               </CardContent>
             </Card>
           </div>

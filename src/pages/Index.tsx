@@ -70,7 +70,7 @@ const Index = () => {
         </header>
 
         {/* Main content with bottom padding for mobile nav */}
-        <main className="p-4 lg:p-8 pb-24 lg:pb-8">
+        <main className="p-4 lg:p-8 pb-28 lg:pb-8">
           {renderContent()}
         </main>
       </div>

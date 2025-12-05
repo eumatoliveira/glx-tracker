@@ -448,41 +448,41 @@ export const IntakeForm = () => {
   ];
 
   return (
-    <div className="space-y-6 animate-slide-up">
-      <div className="flex items-start justify-between">
+    <div className="space-y-5 sm:space-y-6 animate-slide-up">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-foreground mb-2">Diagnóstico Lean Health Care</h2>
-          <p className="text-muted-foreground">Identificar onde a clínica perde dinheiro e o caminho mais rápido para aumentar receita líquida</p>
+          <h2 className="text-xl sm:text-3xl font-bold text-foreground mb-2">Diagnóstico Lean Health Care</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Identificar onde a clínica perde dinheiro e o caminho mais rápido para aumentar receita líquida</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={exportToCSV}>
-            <FileDown className="h-4 w-4 mr-2" />
-            Exportar CSV
+          <Button variant="outline" onClick={exportToCSV} className="flex-1 sm:flex-none h-12 sm:h-10">
+            <FileDown className="h-5 w-5 sm:h-4 sm:w-4 mr-2" />
+            <span className="text-sm">CSV</span>
           </Button>
-          <Button variant="outline" onClick={exportToWord}>
-            <FileText className="h-4 w-4 mr-2" />
-            Exportar Word
+          <Button variant="outline" onClick={exportToWord} className="flex-1 sm:flex-none h-12 sm:h-10">
+            <FileText className="h-5 w-5 sm:h-4 sm:w-4 mr-2" />
+            <span className="text-sm">Word</span>
           </Button>
         </div>
       </div>
 
       <Card className="border-border">
         <CardHeader>
-          <CardTitle className="text-base flex items-center justify-between">
+          <CardTitle className="text-base sm:text-lg flex items-center justify-between">
             <span>Seções do Diagnóstico</span>
             <span className="text-sm font-normal text-muted-foreground">7 seções</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-7 gap-4">
+          <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 sm:gap-4">
             {sections.map((section) => {
               const Icon = section.icon;
               return (
                 <div key={section.id} className="flex flex-col items-center gap-2">
-                  <div className={`p-3 rounded-lg ${section.completed ? 'bg-success/10' : 'bg-muted'}`}>
-                    <Icon className={`h-5 w-5 ${section.completed ? 'text-success' : 'text-muted-foreground'}`} />
+                  <div className={`p-3 sm:p-3 rounded-lg ${section.completed ? 'bg-success/10' : 'bg-muted'}`}>
+                    <Icon className={`h-6 w-6 sm:h-5 sm:w-5 ${section.completed ? 'text-success' : 'text-muted-foreground'}`} />
                   </div>
-                  <span className="text-xs text-center text-muted-foreground">{section.title}</span>
+                  <span className="text-[10px] sm:text-xs text-center text-muted-foreground leading-tight">{section.title}</span>
                   {section.completed && (
                     <CheckCircle2 className="h-4 w-4 text-success" />
                   )}
@@ -495,118 +495,129 @@ export const IntakeForm = () => {
 
       <Accordion type="multiple" className="space-y-4">
         {/* Section 1 - Marketing */}
-        <AccordionItem value="section-1" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-1" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
-              <Megaphone className="h-6 w-6 text-primary" />
+              <Megaphone className="h-6 w-6 sm:h-6 sm:w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">1. Marketing e Aquisição (Leads)</span>
-                <p className="text-sm text-muted-foreground font-normal">Problema de ativação, lead scoring, previsibilidade</p>
+                <span className="font-semibold text-base sm:text-lg">1. Marketing e Aquisição (Leads)</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Problema de ativação, lead scoring, previsibilidade</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
-            <div className="grid grid-cols-2 gap-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Quantos leads entram por mês?</Label>
+                <Label className="text-sm sm:text-base">Quantos leads entram por mês?</Label>
                 <Input 
                   value={formData.leadsPerMonth} 
                   onChange={(e) => handleChange('leadsPerMonth', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 150 leads/mês"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>De onde vêm os leads?</Label>
+                <Label className="text-sm sm:text-base">De onde vêm os leads?</Label>
                 <Input 
                   value={formData.leadSources} 
                   onChange={(e) => handleChange('leadSources', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Instagram, Google, indicação"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Custo por lead</Label>
+                <Label className="text-sm sm:text-base">Custo por lead</Label>
                 <Input 
                   value={formData.costPerLead} 
                   onChange={(e) => handleChange('costPerLead', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: R$ 25,00"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Quem responde os leads?</Label>
+                <Label className="text-sm sm:text-base">Quem responde os leads?</Label>
                 <Input 
                   value={formData.whoRespondsLeads} 
                   onChange={(e) => handleChange('whoRespondsLeads', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Secretária, equipe comercial"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tempo médio de resposta</Label>
+                <Label className="text-sm sm:text-base">Tempo médio de resposta</Label>
                 <Input 
                   value={formData.avgResponseTime} 
                   onChange={(e) => handleChange('avgResponseTime', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 2 horas"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tem CRM ou planilha?</Label>
+                <Label className="text-sm sm:text-base">Tem CRM ou planilha?</Label>
                 <Input 
                   value={formData.hasCRM} 
                   onChange={(e) => handleChange('hasCRM', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Planilha Excel, RD Station"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Qual é o funil? (Recebe lead → responde → agenda → comparece)</Label>
+              <Label className="text-sm sm:text-base">Qual é o funil? (Recebe lead → responde → agenda → comparece)</Label>
               <Textarea 
                 value={formData.funnel} 
                 onChange={(e) => handleChange('funnel', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva as taxas de conversão de cada etapa do funil"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Tem follow up?</Label>
+                <Label className="text-sm sm:text-base">Tem follow up?</Label>
                 <Input 
                   value={formData.hasFollowUp} 
                   onChange={(e) => handleChange('hasFollowUp', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Detalhes do follow up (tempo, frequência)</Label>
+                <Label className="text-sm sm:text-base">Detalhes do follow up (tempo, frequência)</Label>
                 <Input 
                   value={formData.followUpDetails} 
                   onChange={(e) => handleChange('followUpDetails', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 3x em 7 dias"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Responsável pelas vendas</Label>
+                <Label className="text-sm sm:text-base">Responsável pelas vendas</Label>
                 <Input 
                   value={formData.salesResponsible} 
                   onChange={(e) => handleChange('salesResponsible', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Nome ou cargo"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Responsável pelo setor de leads</Label>
+                <Label className="text-sm sm:text-base">Responsável pelo setor de leads</Label>
                 <Input 
                   value={formData.leadsSectorResponsible} 
                   onChange={(e) => handleChange('leadsSectorResponsible', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Nome ou cargo"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
@@ -614,147 +625,160 @@ export const IntakeForm = () => {
         </AccordionItem>
 
         {/* Section 2 - Agenda */}
-        <AccordionItem value="section-2" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-2" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <Calendar className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">2. Agenda/Operação</span>
-                <p className="text-sm text-muted-foreground font-normal">Otimizar agenda, aumentar receita sem mais pacientes</p>
+                <span className="font-semibold text-base sm:text-lg">2. Agenda/Operação</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Otimizar agenda, aumentar receita sem mais pacientes</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
-            <div className="grid grid-cols-2 gap-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Consultas que cabem por dia (por especialidade)</Label>
+                <Label className="text-sm sm:text-base">Consultas que cabem por dia (por especialidade)</Label>
                 <Textarea 
                   value={formData.consultationsPerDayBySpecialty} 
                   onChange={(e) => handleChange('consultationsPerDayBySpecialty', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Dermatologia: 20, Estética: 15"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Consultas realizadas de fato (por especialidade)</Label>
+                <Label className="text-sm sm:text-base">Consultas realizadas de fato (por especialidade)</Label>
                 <Textarea 
                   value={formData.actualConsultationsBySpecialty} 
                   onChange={(e) => handleChange('actualConsultationsBySpecialty', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Dermatologia: 14, Estética: 10"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Procedimentos realizados por especialidade</Label>
+                <Label className="text-sm sm:text-base">Procedimentos realizados por especialidade</Label>
                 <Textarea 
                   value={formData.proceduresBySpecialty} 
                   onChange={(e) => handleChange('proceduresBySpecialty', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste os procedimentos por área"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Taxa de ocupação semanal</Label>
+                <Label className="text-sm sm:text-base">Taxa de ocupação semanal</Label>
                 <Input 
                   value={formData.weeklyOccupancy} 
                   onChange={(e) => handleChange('weeklyOccupancy', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 70%"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Timeline de horários mortos/vagos e cheios</Label>
+              <Label className="text-sm sm:text-base">Timeline de horários mortos/vagos e cheios</Label>
               <Textarea 
                 value={formData.deadHoursTimeline} 
                 onChange={(e) => handleChange('deadHoursTimeline', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Ex: Segunda 8-10h vazio, Terça tarde cheio..."
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Número de no-shows</Label>
+                <Label className="text-sm sm:text-base">Número de no-shows</Label>
                 <Input 
                   value={formData.noShowCount} 
                   onChange={(e) => handleChange('noShowCount', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 15/mês"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Remarcam e comparecem?</Label>
+                <Label className="text-sm sm:text-base">Remarcam e comparecem?</Label>
                 <Input 
                   value={formData.rescheduleRate} 
                   onChange={(e) => handleChange('rescheduleRate', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 60% remarcam"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Taxa de cancelamentos</Label>
+                <Label className="text-sm sm:text-base">Taxa de cancelamentos</Label>
                 <Input 
                   value={formData.cancellationRate} 
                   onChange={(e) => handleChange('cancellationRate', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 20%"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Política de cancelamento</Label>
+                <Label className="text-sm sm:text-base">Política de cancelamento</Label>
                 <Textarea 
                   value={formData.cancellationPolicy} 
                   onChange={(e) => handleChange('cancellationPolicy', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Descreva a política atual"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>O que fazem durante buracos na agenda?</Label>
+                <Label className="text-sm sm:text-base">O que fazem durante buracos na agenda?</Label>
                 <Textarea 
                   value={formData.agendaGapsAction} 
                   onChange={(e) => handleChange('agendaGapsAction', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Descreva as ações tomadas"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Tem secretária? Reorganiza rápido?</Label>
+                <Label className="text-sm sm:text-base">Tem secretária? Reorganiza rápido?</Label>
                 <Input 
                   value={formData.hasSecretary} 
                   onChange={(e) => handleChange('hasSecretary', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não - capacidade"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Função da secretária</Label>
+                <Label className="text-sm sm:text-base">Função da secretária</Label>
                 <Input 
                   value={formData.secretaryFunction} 
                   onChange={(e) => handleChange('secretaryFunction', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste as funções"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Confirmação automática?</Label>
+                <Label className="text-sm sm:text-base">Confirmação automática?</Label>
                 <Input 
                   value={formData.hasAutoConfirmation} 
                   onChange={(e) => handleChange('hasAutoConfirmation', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não - qual sistema"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
@@ -762,131 +786,143 @@ export const IntakeForm = () => {
         </AccordionItem>
 
         {/* Section 3 - Financeiro */}
-        <AccordionItem value="section-3" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-3" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <DollarSign className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">3. Financeiro</span>
-                <p className="text-sm text-muted-foreground font-normal">Driver financeiro, foco em recorrência</p>
+                <span className="font-semibold text-base sm:text-lg">3. Financeiro</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Driver financeiro, foco em recorrência</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
-            <div className="grid grid-cols-4 gap-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
               <div className="space-y-2">
-                <Label>Ticket médio - Consulta inicial</Label>
+                <Label className="text-sm sm:text-base">Ticket - Consulta inicial</Label>
                 <Input 
                   value={formData.avgTicketInitial} 
                   onChange={(e) => handleChange('avgTicketInitial', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Ticket médio - Retorno</Label>
+                <Label className="text-sm sm:text-base">Ticket - Retorno</Label>
                 <Input 
                   value={formData.avgTicketReturn} 
                   onChange={(e) => handleChange('avgTicketReturn', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Ticket médio - Pacotes</Label>
+                <Label className="text-sm sm:text-base">Ticket - Pacotes</Label>
                 <Input 
                   value={formData.avgTicketPackages} 
                   onChange={(e) => handleChange('avgTicketPackages', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Ticket médio - Protocolos</Label>
+                <Label className="text-sm sm:text-base">Ticket - Protocolos</Label>
                 <Input 
                   value={formData.avgTicketProtocols} 
                   onChange={(e) => handleChange('avgTicketProtocols', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Protocolos vendidos por mês</Label>
+                <Label className="text-sm sm:text-base">Protocolos vendidos por mês</Label>
                 <Input 
                   value={formData.protocolsSoldPerMonth} 
                   onChange={(e) => handleChange('protocolsSoldPerMonth', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 25"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Serviços adicionais (produtos, procedimentos)</Label>
+                <Label className="text-sm sm:text-base">Serviços adicionais (produtos, procedimentos)</Label>
                 <Input 
                   value={formData.additionalServices} 
                   onChange={(e) => handleChange('additionalServices', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste os serviços"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Receita bruta últimos 12 meses</Label>
+                <Label className="text-sm sm:text-base">Receita bruta últimos 12 meses</Label>
                 <Input 
                   value={formData.grossRevenue12m} 
                   onChange={(e) => handleChange('grossRevenue12m', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Receita líquida últimos 12 meses</Label>
+                <Label className="text-sm sm:text-base">Receita líquida últimos 12 meses</Label>
                 <Input 
                   value={formData.netRevenue12m} 
                   onChange={(e) => handleChange('netRevenue12m', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Custos fixos detalhados (aluguel, serviços, pessoal, logística, empréstimos, insumos)</Label>
+              <Label className="text-sm sm:text-base">Custos fixos detalhados (aluguel, serviços, pessoal, logística, empréstimos, insumos)</Label>
               <Textarea 
                 value={formData.fixedCosts} 
                 onChange={(e) => handleChange('fixedCosts', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Detalhe cada categoria de custo"
                 rows={4}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Margem real</Label>
+                <Label className="text-sm sm:text-base">Margem real</Label>
                 <Input 
                   value={formData.realMargin} 
                   onChange={(e) => handleChange('realMargin', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 25%"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Breakdown: novos / recorrência / retorno</Label>
+                <Label className="text-sm sm:text-base">Breakdown: novos / recorrência / retorno</Label>
                 <Input 
                   value={formData.revenueBreakdown} 
                   onChange={(e) => handleChange('revenueBreakdown', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 40% / 35% / 25%"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>LTV (Lifetime Value)</Label>
+                <Label className="text-sm sm:text-base">LTV (Lifetime Value)</Label>
                 <Input 
                   value={formData.ltv} 
                   onChange={(e) => handleChange('ltv', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="R$"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
@@ -894,106 +930,115 @@ export const IntakeForm = () => {
         </AccordionItem>
 
         {/* Section 4 - UX */}
-        <AccordionItem value="section-4" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-4" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <Heart className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">4. UX (Retenção)</span>
-                <p className="text-sm text-muted-foreground font-normal">Loop de retenção e recorrência</p>
+                <span className="font-semibold text-base sm:text-lg">4. UX (Retenção)</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Loop de retenção e recorrência</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
             <div className="space-y-2">
-              <Label>O que o paciente recebe depois da consulta? É contatado novamente?</Label>
+              <Label className="text-sm sm:text-base">O que o paciente recebe depois da consulta? É contatado novamente?</Label>
               <Textarea 
                 value={formData.postConsultationContact} 
                 onChange={(e) => handleChange('postConsultationContact', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva o contato pós-consulta"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Tem plano de acompanhamento?</Label>
+                <Label className="text-sm sm:text-base">Tem plano de acompanhamento?</Label>
                 <Input 
                   value={formData.followUpPlan} 
                   onChange={(e) => handleChange('followUpPlan', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não - descreva"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tem suporte via WhatsApp?</Label>
+                <Label className="text-sm sm:text-base">Tem suporte via WhatsApp?</Label>
                 <Input 
                   value={formData.whatsappSupport} 
                   onChange={(e) => handleChange('whatsappSupport', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não - como funciona"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Retorno programado? Já sai com consulta marcada?</Label>
+                <Label className="text-sm sm:text-base">Retorno programado? Já sai com consulta marcada?</Label>
                 <Input 
                   value={formData.scheduledReturn} 
                   onChange={(e) => handleChange('scheduledReturn', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tem lembretes? Manual ou automático?</Label>
+                <Label className="text-sm sm:text-base">Tem lembretes? Manual ou automático?</Label>
                 <Input 
                   value={formData.hasReminders} 
                   onChange={(e) => handleChange('hasReminders', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Sim/Não - tipo"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Processo de lembretes (quem faz, como, quando)</Label>
+              <Label className="text-sm sm:text-base">Processo de lembretes (quem faz, como, quando)</Label>
               <Textarea 
                 value={formData.reminderProcess} 
                 onChange={(e) => handleChange('reminderProcess', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva o processo"
                 rows={2}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Existe estrutura de pós-consulta?</Label>
+              <Label className="text-sm sm:text-base">Existe estrutura de pós-consulta?</Label>
               <Textarea 
                 value={formData.postConsultationStructure} 
                 onChange={(e) => handleChange('postConsultationStructure', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva a estrutura"
                 rows={2}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Reclamações dos pacientes - do que mais reclamam?</Label>
+                <Label className="text-sm sm:text-base">Reclamações dos pacientes - do que mais reclamam?</Label>
                 <Textarea 
                   value={formData.patientComplaints} 
                   onChange={(e) => handleChange('patientComplaints', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste as principais reclamações"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tempo de espera médio e o que fazem nesse tempo</Label>
+                <Label className="text-sm sm:text-base">Tempo de espera médio e o que fazem nesse tempo</Label>
                 <Textarea 
                   value={formData.avgWaitTime} 
                   onChange={(e) => handleChange('avgWaitTime', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: 20min, oferecem café"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
             </div>
@@ -1001,189 +1046,203 @@ export const IntakeForm = () => {
         </AccordionItem>
 
         {/* Section 5 - Processos */}
-        <AccordionItem value="section-5" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-5" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <Settings className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">5. Processos Internos (Lean Six Sigma)</span>
-                <p className="text-sm text-muted-foreground font-normal">Cortar desperdício, melhorar produtividade</p>
+                <span className="font-semibold text-base sm:text-lg">5. Processos Internos (Lean Six Sigma)</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Cortar desperdício, melhorar produtividade</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
             <div className="space-y-2">
-              <Label>Como CEO, tem reuniões com equipe (todos juntos e individuais) pelo menos 1x a cada 15 dias?</Label>
+              <Label className="text-sm sm:text-base">Como CEO, tem reuniões com equipe (todos juntos e individuais) pelo menos 1x a cada 15 dias?</Label>
               <Textarea 
                 value={formData.ceoMeetings} 
                 onChange={(e) => handleChange('ceoMeetings', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva a frequência e formato das reuniões"
                 rows={2}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Quais são os 3 problemas percebidos pela equipe?</Label>
+              <Label className="text-sm sm:text-base">Quais são os 3 problemas percebidos pela equipe?</Label>
               <Textarea 
                 value={formData.teamPerceivedProblems} 
                 onChange={(e) => handleChange('teamPerceivedProblems', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="1. ...\n2. ...\n3. ..."
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Tarefas que a secretária faz manualmente</Label>
+                <Label className="text-sm sm:text-base">Tarefas que a secretária faz manualmente</Label>
                 <Textarea 
                   value={formData.manualSecretaryTasks} 
                   onChange={(e) => handleChange('manualSecretaryTasks', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste as tarefas manuais"
                   rows={3}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tarefas que poderiam ser automatizadas</Label>
+                <Label className="text-sm sm:text-base">Tarefas que poderiam ser automatizadas</Label>
                 <Textarea 
                   value={formData.automationOpportunities} 
                   onChange={(e) => handleChange('automationOpportunities', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste as oportunidades de automação"
                   rows={3}
+                  className="text-base sm:text-sm"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Quem decide o quê? Processo de tomada de decisão</Label>
+              <Label className="text-sm sm:text-base">Quem decide o quê? Processo de tomada de decisão</Label>
               <Textarea 
                 value={formData.decisionProcess} 
                 onChange={(e) => handleChange('decisionProcess', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva a estrutura de decisão"
                 rows={2}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Fluxo da jornada do paciente - como está?</Label>
+              <Label className="text-sm sm:text-base">Fluxo da jornada do paciente - como está?</Label>
               <Textarea 
                 value={formData.patientJourneyFlow} 
                 onChange={(e) => handleChange('patientJourneyFlow', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva o fluxo atual do paciente desde o primeiro contato"
                 rows={4}
+                className="text-base sm:text-sm"
               />
             </div>
           </AccordionContent>
         </AccordionItem>
 
         {/* Section 6 - Identidade */}
-        <AccordionItem value="section-6" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-6" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <Target className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">6. Identidade e Posicionamento</span>
-                <p className="text-sm text-muted-foreground font-normal">Visão estratégica e diferenciação</p>
+                <span className="font-semibold text-base sm:text-lg">6. Identidade e Posicionamento</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Visão estratégica e diferenciação</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
             <div className="space-y-2">
-              <Label>Qual é sua visão como CEO para a clínica?</Label>
+              <Label className="text-sm sm:text-base">Qual é sua visão como CEO para a clínica?</Label>
               <Textarea 
                 value={formData.ceoVision} 
                 onChange={(e) => handleChange('ceoVision', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva sua visão de futuro"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Como quer crescer?</Label>
+              <Label className="text-sm sm:text-base">Como quer crescer?</Label>
               <Textarea 
                 value={formData.growthPlan} 
                 onChange={(e) => handleChange('growthPlan', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva os planos de crescimento"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>O que sua clínica faz de diferente?</Label>
+              <Label className="text-sm sm:text-base">O que sua clínica faz de diferente?</Label>
               <Textarea 
                 value={formData.differentiator} 
                 onChange={(e) => handleChange('differentiator', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva seus diferenciais competitivos"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
             <div className="space-y-2">
-              <Label>Qual é seu público-alvo desejado?</Label>
+              <Label className="text-sm sm:text-base">Qual é seu público-alvo desejado?</Label>
               <Textarea 
                 value={formData.targetAudience} 
                 onChange={(e) => handleChange('targetAudience', e.target.value)}
                 disabled={!isEditing} 
                 placeholder="Descreva o perfil do cliente ideal"
                 rows={3}
+                className="text-base sm:text-sm"
               />
             </div>
           </AccordionContent>
         </AccordionItem>
 
         {/* Section 7 - Dados */}
-        <AccordionItem value="section-7" className="border border-border rounded-lg px-6">
-          <AccordionTrigger className="hover:no-underline py-6">
+        <AccordionItem value="section-7" className="border border-border rounded-lg px-4 sm:px-6">
+          <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
             <div className="flex items-center gap-3">
               <Database className="h-6 w-6 text-primary" />
               <div className="text-left">
-                <span className="font-semibold text-lg">7. Dados (O que tem e não tem)</span>
-                <p className="text-sm text-muted-foreground font-normal">Definir coleta para as próximas 4 semanas</p>
+                <span className="font-semibold text-base sm:text-lg">7. Dados (O que tem e não tem)</span>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal">Definir coleta para as próximas 4 semanas</p>
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="space-y-6 pt-4 pb-6">
-            <div className="grid grid-cols-2 gap-6">
+          <AccordionContent className="space-y-5 sm:space-y-6 pt-4 pb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Tem planilhas, relatórios, histórico?</Label>
+                <Label className="text-sm sm:text-base">Tem planilhas, relatórios, histórico?</Label>
                 <Textarea 
                   value={formData.hasSpreadsheets} 
                   onChange={(e) => handleChange('hasSpreadsheets', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Liste os documentos disponíveis"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Tem dashboards/BI?</Label>
+                <Label className="text-sm sm:text-base">Tem dashboards/BI?</Label>
                 <Input 
                   value={formData.hasDashboards} 
                   onChange={(e) => handleChange('hasDashboards', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Ex: Power BI, Metabase, não tem"
+                  className="h-12 sm:h-10 text-base sm:text-sm"
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
-                <Label>Onde estão os dados?</Label>
+                <Label className="text-sm sm:text-base">Onde estão os dados?</Label>
                 <Textarea 
                   value={formData.dataLocation} 
                   onChange={(e) => handleChange('dataLocation', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Descreva onde os dados estão armazenados"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Os dados são confiáveis?</Label>
+                <Label className="text-sm sm:text-base">Os dados são confiáveis?</Label>
                 <Textarea 
                   value={formData.dataReliability} 
                   onChange={(e) => handleChange('dataReliability', e.target.value)}
                   disabled={!isEditing} 
                   placeholder="Avalie a qualidade e confiabilidade"
                   rows={2}
+                  className="text-base sm:text-sm"
                 />
               </div>
             </div>
@@ -1193,19 +1252,19 @@ export const IntakeForm = () => {
 
       <div className="flex gap-4">
         <Button 
-          className="flex-1" 
+          className="flex-1 h-14 sm:h-12 text-base" 
           size="lg"
           onClick={handleToggleEdit}
           variant={isEditing ? "default" : "outline"}
         >
           {isEditing ? (
             <>
-              <Save className="h-4 w-4 mr-2" />
+              <Save className="h-5 w-5 mr-2" />
               Salvar Alterações
             </>
           ) : (
             <>
-              <Edit2 className="h-4 w-4 mr-2" />
+              <Edit2 className="h-5 w-5 mr-2" />
               Editar Informações
             </>
           )}
