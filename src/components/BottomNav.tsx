@@ -16,7 +16,7 @@ export const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border safe-area-bottom lg:hidden">
-      <div className="flex items-center justify-around h-16 px-2">
+      <div className="flex items-center justify-around h-20 px-2">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -33,16 +33,16 @@ export const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
               )}
             >
               <div className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200",
+                "flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-200",
                 isActive && "bg-primary/10"
               )}>
                 <Icon className={cn(
-                  "h-5 w-5 transition-all duration-200",
+                  "h-7 w-7 transition-all duration-200",
                   isActive && "scale-110"
                 )} />
               </div>
               <span className={cn(
-                "text-[10px] mt-0.5 font-medium transition-all duration-200",
+                "text-xs mt-1 font-medium transition-all duration-200",
                 isActive && "text-primary"
               )}>
                 {tab.label}
